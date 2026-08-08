@@ -215,17 +215,19 @@ function render() {
 
 document.getElementById("hide-unopped").addEventListener("change", (e) => {
   hideUnopposed = e.target.checked;
+  syncURL();
   render();
 });
 
 document.getElementById("vote-filter").addEventListener("change", (e) => {
   voteFilter = e.target.value;
+  syncURL();
   render();
 });
 
 let candidateMulti, officeMulti, wardMulti;
 
-function initMultiSelect(rootEl, { allLabel, countLabel, getOptions }) {
+function initMultiSelect(rootEl, { allLabel, countLabel, getOptions, onChange }) {
   const btn = rootEl.querySelector(".multi-btn");
   const panel = rootEl.querySelector(".multi-panel");
   const list = rootEl.querySelector(".multi-list");
@@ -242,6 +244,7 @@ function initMultiSelect(rootEl, { allLabel, countLabel, getOptions }) {
       if (cb.checked) selected.add(opt);
       else selected.delete(opt);
       update();
+      onChange();
       render();
     });
     label.appendChild(cb);
@@ -254,6 +257,16 @@ function initMultiSelect(rootEl, { allLabel, countLabel, getOptions }) {
 
   function update() {
     btn.textContent = selected.size === 0 ? allLabel : `${countLabel} (${selected.size})`;
+  }
+
+  function setSelected(values) {
+    selected.clear();
+    list.querySelectorAll("input").forEach((cb) => {
+      const on = values.has(cb.value);
+      cb.checked = on;
+      if (on) selected.add(cb.value);
+    });
+    update();
   }
 
   btn.addEventListener("click", () => {
@@ -275,10 +288,11 @@ function initMultiSelect(rootEl, { allLabel, countLabel, getOptions }) {
     list.querySelectorAll("input").forEach((cb) => (cb.checked = false));
     selected.clear();
     update();
+    onChange();
     render();
   });
 
-  return { selected, panel, root: rootEl };
+  return { selected, panel, root: rootEl, setSelected };
 }
 
 document.querySelectorAll("[data-view]").forEach((btn) => {
@@ -290,6 +304,7 @@ document.querySelectorAll("[data-view]").forEach((btn) => {
     );
     candidateMulti.root.hidden = view !== "candidate";
     candidateMulti.panel.hidden = true;
+    syncURL();
     render();
   });
 });
@@ -301,9 +316,58 @@ document.querySelectorAll("[data-color-by]").forEach((btn) => {
     document.querySelectorAll("[data-color-by]").forEach((b) =>
       b.classList.toggle("active", b === btn)
     );
+    syncURL();
     render();
   });
 });
+
+function syncURL() {
+  const p = new URLSearchParams();
+  if (view !== "candidate") p.set("view", view);
+  for (const n of candidateMulti.selected) p.append("candidates", n);
+  for (const n of officeMulti.selected) p.append("offices", n);
+  for (const n of wardMulti.selected) p.append("wards", n.replace("Ward ", ""));
+  if (colorBy !== "ward") p.set("color", colorBy);
+  if (voteFilter !== "all") p.set("votes", voteFilter);
+  if (!hideUnopposed) p.set("unopposed", "1");
+  const qs = p.toString();
+  history.replaceState(null, "", location.pathname + (qs ? "?" + qs : ""));
+}
+
+function applyURLState() {
+  const p = new URLSearchParams(location.search);
+  const v = p.get("view");
+  if (v === "candidate" || v === "proposition") {
+    view = v;
+    document.querySelectorAll("[data-view]").forEach((b) =>
+      b.classList.toggle("active", b.dataset.view === v)
+    );
+    candidateMulti.root.hidden = v !== "candidate";
+    candidateMulti.panel.hidden = true;
+  }
+  const c = p.get("color");
+  if (c === "ward" || c === "party") {
+    colorBy = c;
+    document.querySelectorAll("[data-color-by]").forEach((b) =>
+      b.classList.toggle("active", b.dataset.colorBy === c)
+    );
+  }
+  const votes = p.get("votes");
+  if (votes === "all" || votes === "unpopular" || votes === "very-unpopular") {
+    voteFilter = votes;
+    document.getElementById("vote-filter").value = votes;
+  }
+  if (p.get("unopposed") === "1") {
+    hideUnopposed = false;
+    document.getElementById("hide-unopped").checked = false;
+  }
+  const candidates = p.getAll("candidates");
+  if (candidates.length) candidateMulti.setSelected(new Set(candidates));
+  const offices = p.getAll("offices");
+  if (offices.length) officeMulti.setSelected(new Set(offices));
+  const wards = p.getAll("wards");
+  if (wards.length) wardMulti.setSelected(new Set(wards.map((n) => "Ward " + n)));
+}
 
 async function main() {
   setStatus("Loading election data…");
@@ -311,6 +375,7 @@ async function main() {
   candidateMulti = initMultiSelect(document.getElementById("candidate-multi"), {
     allLabel: "All candidates",
     countLabel: "Candidates",
+    onChange: syncURL,
     getOptions: () =>
       [...new Set(rows.filter((r) => r.type === "candidate").map((r) => r.candidate))].sort(
         (a, b) => a.localeCompare(b)
@@ -319,14 +384,17 @@ async function main() {
   officeMulti = initMultiSelect(document.getElementById("office-multi"), {
     allLabel: "All offices",
     countLabel: "Offices",
+    onChange: syncURL,
     getOptions: () => [...new Set(rows.map((r) => r.office))].sort((a, b) => a.localeCompare(b)),
   });
   wardMulti = initMultiSelect(document.getElementById("ward-multi"), {
     allLabel: "All wards",
     countLabel: "Wards",
+    onChange: syncURL,
     getOptions: () =>
       [...new Set(rows.map((r) => r.ward))].sort((a, b) => a - b).map((n) => "Ward " + n),
   });
+  applyURLState();
   setStatus("Ready");
   render();
 }

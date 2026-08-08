@@ -111,4 +111,4 @@ Source data is the ward-by-ward election results file (`election_data.csv`) bund
 
 <link rel="stylesheet" href="/election/style.css?v=11">
 <script src="/election/vendor/plotly.min.js"></script>
-<script src="/election/app.js?v=11"></script>
+<script src="/election/app.js?v=12"></script>
