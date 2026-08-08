@@ -148,6 +148,10 @@
   flex-direction: column;
 }
 
+.election .multi-list--compact {
+  max-height: none;
+}
+
 .election .multi-list label {
   display: flex;
   align-items: center;

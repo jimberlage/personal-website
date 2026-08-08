@@ -141,6 +141,7 @@ function activeRows() {
     if (hideUnopposed && r.unopposed) return false;
     if (view === "candidate" && candidateMulti.selected.size > 0 && !candidateMulti.selected.has(r.candidate)) return false;
     if (officeMulti.selected.size > 0 && !officeMulti.selected.has(r.office)) return false;
+    if (wardMulti.selected.size > 0 && !wardMulti.selected.has("Ward " + r.ward)) return false;
     if (voteFilter === "unpopular" && !(r.total < 500 && r.pct <= 20)) return false;
     if (voteFilter === "very-unpopular" && !(r.total < 100 && r.pct <= 20)) return false;
     return true;
@@ -222,7 +223,7 @@ document.getElementById("vote-filter").addEventListener("change", (e) => {
   render();
 });
 
-let candidateMulti, officeMulti;
+let candidateMulti, officeMulti, wardMulti;
 
 function initMultiSelect(rootEl, { allLabel, countLabel, getOptions }) {
   const btn = rootEl.querySelector(".multi-btn");
@@ -319,6 +320,12 @@ async function main() {
     allLabel: "All offices",
     countLabel: "Offices",
     getOptions: () => [...new Set(rows.map((r) => r.office))].sort((a, b) => a.localeCompare(b)),
+  });
+  wardMulti = initMultiSelect(document.getElementById("ward-multi"), {
+    allLabel: "All wards",
+    countLabel: "Wards",
+    getOptions: () =>
+      [...new Set(rows.map((r) => r.ward))].sort((a, b) => a - b).map((n) => "Ward " + n),
   });
   setStatus("Ready");
   render();

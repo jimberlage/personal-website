@@ -57,6 +57,20 @@ The chart below plots **one point per result per ward**. The X axis is total vot
     </div>
     <span class="controls-divider"></span>
     <div class="control-group">
+      <span class="controls-label">Wards</span>
+      <div class="multi" id="ward-multi">
+        <button type="button" class="multi-btn" id="ward-multi-btn">All wards</button>
+        <div class="multi-panel" id="ward-multi-panel" hidden>
+          <input type="search" id="ward-search" class="multi-search" placeholder="Search wards…" autocomplete="off" hidden />
+          <div class="multi-list multi-list--compact" id="ward-multi-list"></div>
+          <div class="multi-actions">
+            <button type="button" class="multi-clear" id="ward-clear">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="controls-divider"></span>
+    <div class="control-group">
       <span class="controls-label">Color by</span>
       <div class="segmented" role="group" aria-label="Color by">
         <button type="button" data-color-by="ward" class="active">Ward</button>
@@ -95,6 +109,6 @@ Some notes on reading it:
 
 Source data is the ward-by-ward election results file (`election_data.csv`) bundled with this page.
 
-<link rel="stylesheet" href="/election/style.css?v=10">
+<link rel="stylesheet" href="/election/style.css?v=11">
 <script src="/election/vendor/plotly.min.js"></script>
-<script src="/election/app.js?v=10"></script>
+<script src="/election/app.js?v=11"></script>
