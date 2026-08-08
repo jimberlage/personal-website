@@ -1,0 +1,7 @@
+baseURL = 'https://jimberlage.com/'
+locale = 'en-us'
+title = 'jimberlage.com'
+theme = 'archie'
+
+[markup.goldmark.renderer]
+unsafe = true

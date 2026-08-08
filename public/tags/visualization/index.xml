@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Visualization on jimberlage.com</title>
+		<link>https://jimberlage.com/tags/visualization/</link>
+		<description>Recent content in Visualization on jimberlage.com</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://jimberlage.com/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Aug 26 STL City Election — Ward-by-Ward Visualization</title>
+				<link>https://jimberlage.com/posts/aug26-city-election/</link>
+				<pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://jimberlage.com/posts/aug26-city-election/</guid>
+				<description>&lt;p&gt;The chart below plots &lt;strong&gt;one point per result per ward&lt;/strong&gt;. The X axis is total votes; the Y axis is the share of the vote for that office, normalized across party lines (votes ÷ all votes cast for the office in that ward).&lt;/p&gt;&#xA;&lt;div class=&#34;election&#34;&gt;&#xA;  &lt;p class=&#34;lead&#34;&gt;&#xA;    Hover a point for details; use the controls to show &lt;strong&gt;candidates&lt;/strong&gt; or&#xA;    &lt;strong&gt;propositions&lt;/strong&gt;, to pick which &lt;strong&gt;candidates&lt;/strong&gt; to keep&#xA;    (empty = all), to color dots by &lt;strong&gt;ward&lt;/strong&gt; (the default) or by&#xA;    &lt;strong&gt;party&lt;/strong&gt;, to filter to just the lowest-turnout results&#xA;    (&lt;strong&gt;Unpopular&lt;/strong&gt;: fewer than 500 votes; &lt;strong&gt;Extremely unpopular&lt;/strong&gt;:&#xA;    fewer than 100), dropping anyone who still cleared 20% of the vote, and to exclude&#xA;    candidates who ran &lt;strong&gt;unopposed&lt;/strong&gt;.&#xA;  &lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

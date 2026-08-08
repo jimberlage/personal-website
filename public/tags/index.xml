@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Tags on jimberlage.com</title>
+		<link>https://jimberlage.com/tags/</link>
+		<description>Recent content in Tags on jimberlage.com</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://jimberlage.com/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Data</title>
+				<link>https://jimberlage.com/tags/data/</link>
+				<pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://jimberlage.com/tags/data/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Election</title>
+				<link>https://jimberlage.com/tags/election/</link>
+				<pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://jimberlage.com/tags/election/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Visualization</title>
+				<link>https://jimberlage.com/tags/visualization/</link>
+				<pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://jimberlage.com/tags/visualization/</guid>
+				<description></description>
+			</item>
+	</channel>
+</rss>

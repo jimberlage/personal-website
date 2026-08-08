@@ -1,0 +1,261 @@
+.election {
+  --election-bg: #f6f7fb;
+  --election-card: #ffffff;
+  --election-text: #1c2333;
+  --election-muted: #5c6a84;
+  --election-border: #e2e6ef;
+  --election-accent: #1f77b4;
+  box-sizing: border-box;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Inter, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: var(--election-text);
+  line-height: 1.5;
+}
+
+.election *,
+.election *::before,
+.election *::after {
+  box-sizing: border-box;
+}
+
+.election svg {
+  max-width: none;
+  max-height: none;
+  max-inline-size: none;
+  max-block-size: none;
+}
+
+.election .lead {
+  color: var(--election-muted);
+  max-width: 78ch;
+  margin: 8px 0 16px;
+}
+
+.election .controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  row-gap: 10px;
+  margin: 0 0 12px;
+}
+
+.election .controls-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--election-border);
+  margin: 0 4px;
+}
+
+.election .controls-label {
+  font-size: 13px;
+  color: var(--election-muted);
+}
+
+.election .control-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.election .segmented {
+  display: inline-flex;
+  border: 1px solid var(--election-border);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--election-card);
+}
+
+.election .segmented button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--election-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.election .segmented button.active {
+  background: var(--election-accent);
+  color: #fff;
+}
+
+.election .segmented button:not(.active):hover {
+  color: var(--election-text);
+}
+
+.election .multi {
+  position: relative;
+  display: inline-block;
+}
+
+.election .multi-btn {
+  appearance: none;
+  border: 1px solid var(--election-border);
+  border-radius: 999px;
+  background: var(--election-card);
+  color: var(--election-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 14px;
+  cursor: pointer;
+}
+
+.election .multi-btn:hover {
+  border-color: var(--election-accent);
+}
+
+.election .multi-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 50;
+  width: 280px;
+  background: var(--election-card);
+  border: 1px solid var(--election-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(20, 30, 60, 0.18);
+  padding: 8px;
+}
+
+.election .multi-search {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--election-border);
+  border-radius: 8px;
+  background: var(--election-bg);
+  color: var(--election-text);
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 10px;
+  margin-bottom: 6px;
+}
+
+.election .multi-search:focus {
+  outline: 2px solid var(--election-accent);
+  outline-offset: 1px;
+}
+
+.election .multi-list {
+  max-height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.election .multi-list label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.election .multi-list label:hover {
+  background: var(--election-bg);
+}
+
+.election .multi-list input {
+  accent-color: var(--election-accent);
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.election .multi-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.election .multi-clear {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--election-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.election .multi-clear:hover {
+  color: var(--election-text);
+  background: var(--election-bg);
+}
+
+.election .election-select {
+  appearance: auto;
+  border: 1px solid var(--election-border);
+  border-radius: 999px;
+  background: var(--election-card);
+  color: var(--election-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.election .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--election-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.election .check input {
+  accent-color: var(--election-accent);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.election .chart-frame {
+  background: var(--election-card);
+  border: 1px solid var(--election-border);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 6px 22px rgba(20, 30, 60, 0.06);
+}
+
+.election #chart {
+  width: 100%;
+  height: 620px;
+}
+
+.election .stats {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--election-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@media (min-width: 60em) {
+  .post-container {
+    grid-template-columns: 1fr;
+  }
+
+  .election .chart-frame {
+    width: min(100vw - 2rem, 1440px);
+    margin-inline: calc(50% - (min(100vw - 2rem, 1440px) / 2));
+    overflow-x: auto;
+  }
+
+  .election #chart {
+    width: max(100%, 1000px);
+  }
+}
