@@ -28,7 +28,7 @@
     { id: 'sub', name: 'Subtraction', blurb: 'Slide rods into the take-away area', rod: 3, sheets: [
       ['Take away', '3-1', '4-2', '5-2', '6-3', '7-4', 'B 2 neg'],
       ['Count back', '6-1', '8-2', '9-3', '10-4', '10-6', 'B 4 neg rods=2'],
-      ['How many more?', '3+_=5', '4+_=7', '6+_=9', '_+3=8', '_+6=10', 'B 1 neg rods=2'],
+      ['How many more?', '5-3', '7-4', '9-6', '8-3', '10-6', 'B 1 neg rods=2'],
       ['Missing part', '7-_=4', '9-_=5', '_-3=6', '10-_=3', '_-4=8', 'B 5 neg rods=3'],
       ['From 10', '10-1', '10-3', '10-5', '10-8', '10-_=4', 'B 6 neg'],
       ['Teen minus', '12-2', '13-4', '15-6', '17-9', '18-_=9', 'B 7 neg rods=2'],
