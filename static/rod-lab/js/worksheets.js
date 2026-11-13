@@ -110,11 +110,13 @@
       q.hint = 'Type ' + m[1] + '/' + m[2] + ' x ' + m[3] + ' into the bar, then count the blocks in the parts you picked.';
     } else if ((m = /^(\d+)\/(\d+)$/.exec(spec))) {
       var a = parseInt(m[1], 10), d = parseInt(m[2], 10);
+      var rem = a % d;
       q.kind = 'divide';
-      q.label = a % d ? 'Remainder' : 'Divide';
-      q.prompt = a + ' ÷ ' + d + ' = ☐';
-      q.answer = { q: Math.floor(a / d), r: a % d };
-      q.hint = 'Type ' + a + ' / ' + d + ' into the bar, then make groups of ' + d + ' until there are fewer than ' + d + ' left.';
+      q.label = rem ? 'Remainder' : 'Divide';
+      q.prompt = a + ' ÷ ' + d + ' = ☐' + (rem ? ' R ☐' : '');
+      q.answer = { q: Math.floor(a / d), r: rem };
+      q.placeholder = rem ? 'groups R leftover' : 'groups';
+      q.hint = 'Type ' + a + ' / ' + d + ' into the bar, then make groups of ' + d + ' until fewer than ' + d + ' are left.' + (rem ? ' The leftovers go after the R.' : '');
     } else {
       q.kind = 'solve';
       q.label = 'Solve';
@@ -154,8 +156,8 @@
   function check(q, answerText, model) {
     if (q.kind === 'build') return checkBuild(q.build, model);
     if (q.kind === 'divide') {
-      var m = /^\s*(\d+)\s*(?:r|R|rem|remainder)?\s*(\d+)?\s*$/.exec(answerText || '');
-      if (!m) return { ok: false, message: 'Write it like 3 R 2.' };
+      var m = /^\s*(\d+)\s*(?:r|rem|remainder)?\s*(\d+)?\s*$/i.exec(answerText || '');
+      if (!m) return { ok: false, message: 'Write the groups, then R, then the leftovers.' };
       var qq = parseInt(m[1], 10), rr = m[2] ? parseInt(m[2], 10) : 0;
       if (qq === q.answer.q && rr === q.answer.r) return { ok: true };
       if (qq === q.answer.q) return { ok: false, message: 'The number of groups is right. Count the leftovers again.' };

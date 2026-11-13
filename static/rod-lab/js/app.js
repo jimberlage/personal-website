@@ -202,7 +202,7 @@
         '<span class="tag">' + esc(q.label) + '</span>' + levelBars(n) + '</div>' +
         '<p class="qcard-prompt">' + esc(q.prompt) + '</p>' +
         '<form class="qcard-answer" novalidate>' +
-          (typed ? '<label for="answer">Your answer</label><input id="answer" class="answer-input" type="text" inputmode="' + (q.kind === 'divide' ? 'text' : 'numeric') + '" autocomplete="off" placeholder="' + (q.kind === 'divide' ? 'like 3 R 2' : '') + '">' : '') +
+          (typed ? '<label for="answer">Your answer</label><input id="answer" class="answer-input' + (q.kind === 'divide' ? ' is-divide' : '') + '" type="text" inputmode="' + (q.kind === 'divide' ? 'text' : 'numeric') + '" autocomplete="off" placeholder="' + (q.placeholder ? esc(q.placeholder) : '') + '">' : '') +
           '<button type="submit" class="btn btn-primary">' + (typed ? 'Check' : 'Check my blocks') + '</button>' +
         '</form>' +
         '<p class="qcard-feedback" aria-live="polite"></p>' +
@@ -218,6 +218,7 @@
     });
     var saved = S.work(sh.id, n);
     if (saved) current.setText(saved);
+    else if (q.kind === 'divide') current.setText(q.spec);
 
     var form = app.querySelector('.qcard-answer');
     var feedback = app.querySelector('.qcard-feedback');

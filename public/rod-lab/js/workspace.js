@@ -513,6 +513,7 @@
     $.divider.hidden = !showNeg;
     $.areaRem.hidden = !divide;
     $.fraction.hidden = !fraction;
+    $.board.classList.toggle('is-divide', divide);
     $.areaNeg.style.flexBasis = (s.negFrac * 100) + '%';
 
     this._renderStrip();
@@ -599,14 +600,18 @@
     $.remUnits.innerHTML = '';
     if (leftover) {
       for (var j = 0; j < loose; j++) $.remUnits.appendChild(R.makeRod(1, { badge: false, className: 'unit' }));
-      $.remText.innerHTML = loose
-        ? '<b>' + loose + ' left.</b> Not enough to make another ' + d.divisor + ', so they stay loose.'
-        : '<b>Nothing left over.</b> ' + d.dividend + ' splits evenly into groups of ' + d.divisor + '.';
+      if (!d.dividend) {
+        $.remText.textContent = 'Blocks left after the groups are made show up here.';
+      } else if (loose) {
+        $.remText.innerHTML = '<b>' + loose + (loose === 1 ? ' block left.' : ' blocks left.') + '</b> Not enough to make another ' + d.divisor + ', so ' + (loose === 1 ? 'it stays' : 'they stay') + ' here.';
+      } else {
+        $.remText.innerHTML = '<b>Nothing left over.</b> ' + d.dividend + ' splits evenly into groups of ' + d.divisor + '.';
+      }
     } else {
-      $.remText.textContent = 'Leftovers land here when there aren’t enough for another ' + d.divisor + '.';
+      $.remText.textContent = 'Blocks left after the groups are made show up here.';
     }
     $.status.textContent = d.made + (d.made === 1 ? ' group' : ' groups') + ' of ' + d.divisor + ' made from ' + d.dividend + ' blocks.' +
-      (leftover ? '' : ' ' + loose + ' still loose.');
+      (loose ? (leftover ? ' ' + loose + (loose === 1 ? ' block' : ' blocks') + ' left over.' : ' ' + loose + ' still loose.') : ' Nothing left over.');
   };
 
   P._renderFraction = function () {
@@ -664,6 +669,10 @@
     if (s.mode === 'divide') {
       var d = s.divide;
       var loose = d.dividend - d.made * d.divisor;
+      var limit = d.divisor === 1 ? 'no blocks are left' : 'fewer than ' + d.divisor + ' blocks are left';
+      var hint = loose < d.divisor
+        ? (loose ? loose + (loose === 1 ? ' block is' : ' blocks are') + ' left over.' : 'Nothing is left over.')
+        : 'Press the button until ' + limit + '. You can also drag the ' + d.divisor + '-rod.';
       strip.innerHTML =
         '<span class="eyebrow">Divide by</span>' +
         '<div class="slot">' +
@@ -673,7 +682,7 @@
           '<button class="btn btn-icon" type="button" data-act="divisor" data-d="1" aria-label="Bigger divisor"' + (d.divisor >= 10 ? ' disabled' : '') + '>+</button>' +
         '</div>' +
         '<button class="btn btn-primary" type="button" data-act="scoop"' + (loose < d.divisor ? ' disabled' : '') + '>Make a group of ' + d.divisor + '</button>' +
-        '<span class="strip-hint">' + (loose < d.divisor ? 'All the groups are made.' : 'Or drag the ' + d.divisor + '-rod onto the loose blocks.') + '</span>';
+        '<span class="strip-hint">' + hint + '</span>';
       var rod = R.makeRod(d.divisor, { cell: 16, badge: false, className: 'divisor-rod' });
       rod.dataset.divisor = '1';
       strip.querySelector('.slot-rod').appendChild(rod);

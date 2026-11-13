@@ -144,7 +144,7 @@ button, input { font: inherit; color: inherit; }
 .side-title { font-weight: 600; font-size: 16px; }
 .side-drop { position: relative; flex: 1 1 auto; margin: 0 14px 14px; border: 2px dashed #B8BDCB; border-radius: 14px; background: rgba(255,255,255,0.45); }
 .side-empty { position: absolute; left: 12px; right: 12px; bottom: 12px; margin: 0; text-align: center; font-size: 13px; color: var(--muted); pointer-events: none; }
-.rem-drop { border-color: #C9B77A; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 16px; }
+.rem-drop { border-style: solid; border-color: #E2D2A2; background: rgba(255,255,255,0.55); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 16px; }
 .rem-drop .side-empty { position: static; }
 .rem-units { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 
@@ -214,6 +214,7 @@ button, input { font: inherit; color: inherit; }
 .qcard-answer { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .qcard-answer label { font-size: 14px; font-weight: 600; color: var(--muted); }
 .answer-input { width: 140px; min-height: 44px; font-family: var(--mono); font-size: 20px; font-weight: 700; padding: 6px 12px; border: 2px solid var(--line-2); border-radius: 10px; }
+.answer-input.is-divide { width: 240px; max-width: 100%; }
 .answer-input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px var(--accent-ring); }
 .qcard-feedback { flex-basis: 100%; margin: 0; font-size: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .qcard-feedback:empty { display: none; }
@@ -288,4 +289,9 @@ button, input { font: inherit; color: inherit; }
   .eq-input, .eq-result, .eq-equals { font-size: 24px; }
   .board { height: 460px; }
   .area-neg { min-width: 120px; }
+  .board.is-divide { flex-direction: column; height: auto; }
+  .board.is-divide .area-pos { flex: 0 0 430px; }
+  .board.is-divide .layer.is-flow { padding: 180px 16px 16px; }
+  .board.is-divide .area-rem { flex: 0 0 auto; min-width: 0; border-left: none; border-top: 1px solid var(--line-2); }
+  .board.is-divide .rem-drop { min-height: 190px; }
 }
