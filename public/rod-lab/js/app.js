@@ -56,7 +56,7 @@
     var last = S.get('lastSheet') && W.sheet(S.get('lastSheet'));
     var html = header('sheets', '') + '<main class="page page-library">' +
       '<div class="lib-top">' +
-        '<div class="lib-intro"><h1>Worksheets</h1><p>Each sheet has up to 6 questions that start easy and finish with a stretch. Every question opens in the same block workspace.</p></div>';
+        '<div class="lib-intro"><h1>Worksheets</h1><p>Each sheet has up to 6 questions that start easy and finish with a stretch.</p></div>';
     if (last) {
       var nextQ = firstOpenQuestion(last);
       html += '<a class="continue" href="#/sheet/' + last.id + (nextQ ? '/q/' + nextQ : '') + '">' +
