@@ -4,7 +4,7 @@
 
   var CELL = 34;
 
-  /* Cuisenaire-style colors by group size. `edge` is a darker shade for the outline. */
+  /* Colors by group size. `edge` is a darker shade for the outline. */
   var PALETTE = {
     1: { fill: '#F4F1EA', edge: '#8A8578' },
     2: { fill: '#D7393B', edge: '#8E1F21' },

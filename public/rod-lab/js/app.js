@@ -27,7 +27,9 @@
           '<a href="#/play"' + (page === 'play' ? ' aria-current="page"' : '') + '>Workspace</a>' +
         '</nav>' +
       '</div>' +
-      '<div class="topbar-right">' + (right || '') + '</div>' +
+      '<div class="topbar-right">' + (right || '') +
+        '<a class="license" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener" title="Creative Commons Attribution 4.0 International">CC BY 4.0</a>' +
+      '</div>' +
     '</header>';
   }
 

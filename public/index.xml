@@ -10,16 +10,9 @@
 		
 		
 		
-			<lastBuildDate>Fri, 13 Nov 2026 00:00:00 +0000</lastBuildDate>
+			<lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
 		
 			<atom:link href="https://jimberlage.com/index.xml" rel="self" type="application/rss+xml" />
-			<item>
-				<title>Rod Lab — A Miquon-Inspired Math App</title>
-				<link>https://jimberlage.com/posts/rod-lab/</link>
-				<pubDate>Fri, 13 Nov 2026 00:00:00 +0000</pubDate>
-				<guid>https://jimberlage.com/posts/rod-lab/</guid>
-				<description>&lt;p&gt;Rod Lab is a small math app built around Cuisenaire-style rods: each length has its own color, and everything the worksheets ask is built or solved with the same pieces. It pairs a set of worksheets with a free block workspace, and the two share the same manipulatives.&lt;/p&gt;&#xA;&lt;p&gt;It&amp;rsquo;s plain HTML, CSS, and JavaScript — no build step and no dependencies. Progress is saved in the browser&amp;rsquo;s local storage, so there&amp;rsquo;s no account and nothing to sync.&lt;/p&gt;</description>
-			</item>
 			<item>
 				<title>Aug 26 STL City Election — Ward-by-Ward Visualization</title>
 				<link>https://jimberlage.com/posts/aug26-city-election/</link>
