@@ -50,14 +50,6 @@
       ['Check with ×', '10/2', '12/6', '15/3', '20/4', '21/7', '24/8'],
       ['Bigger numbers', '30/5', '32/10', '40/8', '45/9', '50/7', '63/10'],
       ['Mixed review', '9/2', '16/4', '22/5', '27/9', '35/6', '47/8']
-    ] },
-    { id: 'frac', name: 'Fractions', blurb: 'Cut a rod into equal parts', rod: 9, unlock: { strand: 'div', sheet: 3 }, sheets: [
-      ['Halves', '1/2x2', '1/2x4', '1/2x6', '1/2x8', '1/2x10', '2/2x6'],
-      ['Thirds and quarters', '1/3x3', '1/3x6', '1/4x4', '1/4x8', '2/3x9', '3/4x4'],
-      ['Part of a rod', '2/4x8', '3/4x8', '2/5x10', '3/5x5', '4/5x10', '5/6x6'],
-      ['Compare parts', '1/2x8', '2/4x8', '1/3x9', '2/6x6', '3/9x9', '4/8x8'],
-      ['Same amount, new name', '1/2x10', '5/10x10', '2/3x6', '4/6x6', '3/4x8', '6/8x8'],
-      ['Mixed review', '1/5x10', '3/7x7', '2/3x9', '5/8x8', '7/10x10', '4/9x9']
     ] }
   ];
 
@@ -65,8 +57,7 @@
     add: { showResult: false, allowMult: true, multOn: false, takeAway: false, hints: true },
     sub: { showResult: false, allowMult: true, multOn: false, takeAway: true, hints: true },
     mul: { showResult: false, allowMult: true, multOn: true, takeAway: true, hints: true },
-    div: { showResult: false, allowMult: true, multOn: true, takeAway: true, hints: true },
-    frac: { showResult: false, allowMult: true, multOn: false, takeAway: true, hints: true }
+    div: { showResult: false, allowMult: true, multOn: true, takeAway: true, hints: true }
   };
 
   function pretty(spec) {
