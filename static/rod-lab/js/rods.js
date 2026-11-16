@@ -7,14 +7,14 @@
   /* Rod colors by group size. `edge` outlines the rod; `line` separates its unit cells. */
   var PALETTE = {
     1: { fill: '#F4F1EA', edge: '#8A8578', line: 'rgba(0,0,0,0.42)' },
-    2: { fill: '#D7393B', edge: '#FFFFFF', line: 'rgba(255,255,255,0.88)' },
+    2: { fill: '#D7393B', edge: '#E3E3E3', line: 'rgba(255,255,255,0.88)' },
     3: { fill: '#8BCB5A', edge: '#4D7E2C', line: 'rgba(0,0,0,0.42)' },
-    4: { fill: '#8E5BB8', edge: '#FFFFFF', line: 'rgba(255,255,255,0.88)' },
+    4: { fill: '#8E5BB8', edge: '#E3E3E3', line: 'rgba(255,255,255,0.88)' },
     5: { fill: '#F2CC3A', edge: '#9C7E0F', line: 'rgba(0,0,0,0.42)' },
-    6: { fill: '#2F7D4F', edge: '#FFFFFF', line: 'rgba(255,255,255,0.88)' },
-    7: { fill: '#2B2B2E', edge: '#FFFFFF', line: 'rgba(255,255,255,0.88)' },
-    8: { fill: '#8B5A2B', edge: '#FFFFFF', line: 'rgba(255,255,255,0.88)' },
-    9: { fill: '#3A72C9', edge: '#FFFFFF', line: 'rgba(255,255,255,0.88)' },
+    6: { fill: '#2F7D4F', edge: '#E3E3E3', line: 'rgba(255,255,255,0.88)' },
+    7: { fill: '#2B2B2E', edge: '#E3E3E3', line: 'rgba(255,255,255,0.88)' },
+    8: { fill: '#8B5A2B', edge: '#E3E3E3', line: 'rgba(255,255,255,0.88)' },
+    9: { fill: '#3A72C9', edge: '#E3E3E3', line: 'rgba(255,255,255,0.88)' },
     10: { fill: '#EE8A2A', edge: '#9A520E', line: 'rgba(0,0,0,0.42)' }
   };
 
