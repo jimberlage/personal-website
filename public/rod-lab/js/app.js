@@ -43,6 +43,12 @@
     return S.doneCount(need.id) >= need.questions.length;
   }
 
+  function isDivisionText(text) {
+    if (!text) return false;
+    var res = E.read(text);
+    return res.ok && res.mode === 'divide';
+  }
+
   function sheetState(sh) {
     var done = S.doneCount(sh.id);
     if (done >= sh.questions.length) return 'done';
@@ -128,6 +134,9 @@
     var done = S.doneCount(sh.id);
     var total = sh.questions.length;
     var settings = sheetSettings(sh);
+    var settingRows = sh.strand === 'div'
+      ? SETTING_ROWS.filter(function (r) { return r[0] !== 'allowMult' && r[0] !== 'multOn'; })
+      : SETTING_ROWS;
     var nextQ = firstOpenQuestion(sh);
 
     var html = header('sheets', '') + '<main class="page page-sheet">' +
@@ -152,7 +161,7 @@
     });
     html += '</div></div>' +
       '<aside class="settings" aria-label="Sheet settings for grown-ups"><h2>Sheet settings</h2><p class="muted">For grown-ups. Applies to this sheet only.</p>';
-    SETTING_ROWS.forEach(function (r) {
+    settingRows.forEach(function (r) {
       html += '<div class="setting"><div><span class="setting-label">' + r[1] + '</span><span class="setting-help">' + r[2] + '</span></div>' +
         '<button type="button" class="switch switch-bare" data-setting="' + r[0] + '" aria-pressed="' + !!settings[r[0]] + '" aria-label="' + r[1] + '"><span class="switch-track"><span class="switch-knob"></span></span></button></div>';
     });
@@ -213,12 +222,12 @@
 
     var wsRoot = document.getElementById('ws-root');
     current = new RL.Workspace(wsRoot, {
-      settings: Object.assign({}, settings, { showResult: settings.showResult || solved }),
+      settings: Object.assign({}, settings, { showResult: settings.showResult || solved, allowDivision: q.kind === 'divide' }),
       onChange: function () { S.setWork(sh.id, n, current.format()); }
     });
     var saved = S.work(sh.id, n);
-    if (saved) current.setText(saved);
-    else if (q.kind === 'divide') current.setText(q.spec);
+    if (q.kind === 'divide') current.setText(q.spec);
+    else if (saved && !isDivisionText(saved)) current.setText(saved);
 
     var form = app.querySelector('.qcard-answer');
     var feedback = app.querySelector('.qcard-feedback');
@@ -283,7 +292,7 @@
       onChange: function () { S.set('playWork', current.format()); S.set('playMult', current.state.mult); }
     });
     var saved = S.get('playWork');
-    current.setText(saved != null ? saved : '(2 × 3) + 5');
+    current.setText(saved != null && !isDivisionText(saved) ? saved : '(2 × 3) + 5');
     document.title = 'Rod Lab · Workspace';
   }
 

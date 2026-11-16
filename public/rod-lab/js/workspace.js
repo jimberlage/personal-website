@@ -85,7 +85,7 @@
     opts = opts || {};
     this.root = root;
     this.opts = opts;
-    this.settings = Object.assign({ showResult: true, allowMult: true, multOn: false, takeAway: true }, opts.settings || {});
+    this.settings = Object.assign({ showResult: true, allowMult: true, multOn: false, takeAway: true, allowDivision: false }, opts.settings || {});
     this.revealed = !!this.settings.showResult;
     this.onChange = opts.onChange || function () {};
     this.state = {
@@ -118,6 +118,7 @@
     this.el = el;
     var q = function (s) { return el.querySelector(s); };
     this.$ = {
+      eqbar: q('.eqbar'), tbLeft: q('.tb-left'),
       input: q('.eq-input'), result: q('.eq-result'), resultText: q('.eq-result-text'), msg: q('.eq-msg'),
       mult: q('[data-act="mult"]'), tbHint: q('.tb-hint'), strip: q('.mode-strip'),
       board: q('.board'), areaPos: q('.area-pos'), areaNeg: q('.area-neg'), areaRem: q('.area-rem'),
@@ -249,6 +250,10 @@
   };
 
   P.clear = function () {
+    if (this.state.mode === 'divide') {
+      this._commit(function (s) { s.divide.made = 0; });
+      return;
+    }
     this._commit(function (s) {
       s.mode = 'normal'; s.groups = [];
       s.divide = { dividend: 0, divisor: s.divide.divisor, made: 0 };
@@ -374,6 +379,11 @@
     var text = this.$.input.value;
     var res = E.read(text);
     if (!res.ok) { this._showError(text, res); return; }
+    if (res.mode === 'divide' && !this.settings.allowDivision) {
+      var at = text.search(/[\/÷]/);
+      this._showError(text, { pos: at < 0 ? text.length : at, message: 'Division is only on division sheets. For a fraction, type 3/4 × 8.' });
+      return;
+    }
     if (res.mode === 'normal' && res.neg.length && !this.settings.takeAway) {
       this._showError(text, { pos: text.search(/[-−–]/), message: 'The take-away area is turned off for this sheet.' });
       return;
@@ -460,7 +470,7 @@
     this.lastError = null;
     this.$.input.removeAttribute('aria-invalid');
     this.$.msg.className = 'eq-msg';
-    this.$.msg.innerHTML = 'Type numbers, spaces and <b>+ − x ÷</b> (or /). Try <b>17 / 5</b> or <b>3/4 x 8</b> too.';
+    this.$.msg.innerHTML = 'Type numbers, spaces and <b>+ − x</b> (or <b>/</b> for a fraction). Try <b>(2 × 3) + 5</b> or <b>3/4 x 8</b>.';
   };
 
   P._renderResult = function () {
@@ -507,8 +517,10 @@
       ? 'On: groups of the same size count together, wherever they sit.'
       : 'Off: every group is its own term.';
 
+    $.eqbar.hidden = divide;
+    $.tbLeft.hidden = divide;
     $.areaPos.hidden = fraction;
-    $.bin.hidden = fraction;
+    $.bin.hidden = divide || fraction;
     $.areaNeg.hidden = !showNeg;
     $.divider.hidden = !showNeg;
     $.areaRem.hidden = !divide;

@@ -116,7 +116,7 @@
       q.prompt = a + ' ÷ ' + d + ' = ☐' + (rem ? ' R ☐' : '');
       q.answer = { q: Math.floor(a / d), r: rem };
       q.placeholder = rem ? 'groups R leftover' : 'groups';
-      q.hint = 'Type ' + a + ' / ' + d + ' into the bar, then make groups of ' + d + ' until fewer than ' + d + ' are left.' + (rem ? ' The leftovers go after the R.' : '');
+      q.hint = 'Press “Make a group of ' + d + '” until ' + (rem ? 'fewer than ' + d + ' are' : 'no blocks are') + ' left.' + (rem ? ' The leftovers go after the R.' : '');
     } else {
       q.kind = 'solve';
       q.label = 'Solve';

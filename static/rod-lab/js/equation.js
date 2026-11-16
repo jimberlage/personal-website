@@ -33,7 +33,7 @@
       if (OPS[ch]) { tokens.push({ type: 'op', value: OPS[ch], pos: i, end: i + 1 }); i++; continue; }
       if (ch === '(') { tokens.push({ type: 'lp', pos: i, end: i + 1 }); i++; continue; }
       if (ch === ')') { tokens.push({ type: 'rp', pos: i, end: i + 1 }); i++; continue; }
-      return err(i, 'Only numbers, spaces and + − × ÷ can go here.');
+      return err(i, 'Only numbers, spaces and + − × / can go here.');
     }
     return { ok: true, tokens: tokens };
   }
@@ -100,7 +100,7 @@
       }
       var nxt = peek();
       if (nxt && !inParens) {
-        if (nxt.type === 'num' || nxt.type === 'lp') return fail(nxt.pos, 'Put + − × or ÷ between numbers.');
+        if (nxt.type === 'num' || nxt.type === 'lp') return fail(nxt.pos, 'Put + − × or / between numbers.');
         if (nxt.type === 'rp') return fail(nxt.pos, 'This bracket has nothing to close.');
       }
       return node;
@@ -158,7 +158,7 @@
     }
 
     if (containsDiv(ast)) {
-      return err(findDiv(ast).opPos, 'Division works on its own, like 17 ÷ 5, or as a fraction, like 3/4 × 8.');
+      return err(findDiv(ast).opPos, 'Division only works as a fraction here, like 3/4 × 8.');
     }
 
     var parts = summands(ast, 1, []);

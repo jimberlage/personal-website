@@ -119,6 +119,7 @@ button, input { font: inherit; color: inherit; }
 .area-pos { flex: 1 1 auto; background-color: #fff; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 34px 34px; }
 .layer { position: absolute; inset: 0; }
 .layer.is-flow { overflow: auto; padding: 20px 20px 20px 188px; }
+.board.is-divide .layer.is-flow { padding: 20px; }
 
 .bin { position: absolute; z-index: 2; top: 14px; left: 14px; width: 150px; padding: 12px; background: var(--paper); border: 2px dashed #BDB6A6; border-radius: 14px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
 .bin.is-hot { border-color: var(--accent); background: var(--accent-soft); }
@@ -291,7 +292,7 @@ button, input { font: inherit; color: inherit; }
   .area-neg { min-width: 120px; }
   .board.is-divide { flex-direction: column; height: auto; }
   .board.is-divide .area-pos { flex: 0 0 430px; }
-  .board.is-divide .layer.is-flow { padding: 180px 16px 16px; }
+  .board.is-divide .layer.is-flow { padding: 20px 16px 16px; }
   .board.is-divide .area-rem { flex: 0 0 auto; min-width: 0; border-left: none; border-top: 1px solid var(--line-2); }
   .board.is-divide .rem-drop { min-height: 190px; }
 }
