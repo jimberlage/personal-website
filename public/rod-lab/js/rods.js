@@ -4,18 +4,19 @@
 
   var CELL = 34;
 
-  /* Rod colors by group size. `edge` outlines the rod; `line` separates its unit cells. */
+  /* Rod colors by group size. `edge` outlines the rod; `line` separates its
+   * unit cells; `mark` is the take-away cross drawn over a unit. */
   var PALETTE = {
-    1: { fill: '#F4F1EA', edge: '#8A8578', line: 'rgba(0,0,0,0.42)' },
-    2: { fill: '#D7393B', edge: '#E3E3E3', line: '#E3E3E3' },
-    3: { fill: '#8BCB5A', edge: '#4D7E2C', line: 'rgba(0,0,0,0.42)' },
-    4: { fill: '#8E5BB8', edge: '#E3E3E3', line: '#E3E3E3' },
-    5: { fill: '#F2CC3A', edge: '#9C7E0F', line: 'rgba(0,0,0,0.42)' },
-    6: { fill: '#2F7D4F', edge: '#E3E3E3', line: '#E3E3E3' },
-    7: { fill: '#2B2B2E', edge: '#E3E3E3', line: '#E3E3E3' },
-    8: { fill: '#8B5A2B', edge: '#E3E3E3', line: '#E3E3E3' },
-    9: { fill: '#3A72C9', edge: '#E3E3E3', line: '#E3E3E3' },
-    10: { fill: '#EE8A2A', edge: '#9A520E', line: 'rgba(0,0,0,0.42)' }
+    1: { fill: '#F4F1EA', edge: '#8A8578', line: 'rgba(0,0,0,0.42)', mark: '#454038' },
+    2: { fill: '#D7393B', edge: '#E3E3E3', line: '#E3E3E3', mark: '#FFF6EF' },
+    3: { fill: '#8BCB5A', edge: '#4D7E2C', line: 'rgba(0,0,0,0.42)', mark: '#1E3B13' },
+    4: { fill: '#8E5BB8', edge: '#E3E3E3', line: '#E3E3E3', mark: '#FFF6EF' },
+    5: { fill: '#F2CC3A', edge: '#9C7E0F', line: 'rgba(0,0,0,0.42)', mark: '#4B3A00' },
+    6: { fill: '#2F7D4F', edge: '#E3E3E3', line: '#E3E3E3', mark: '#FFF6EF' },
+    7: { fill: '#2B2B2E', edge: '#E3E3E3', line: '#E3E3E3', mark: '#FFF6EF' },
+    8: { fill: '#8B5A2B', edge: '#E3E3E3', line: '#E3E3E3', mark: '#FFF6EF' },
+    9: { fill: '#3A72C9', edge: '#E3E3E3', line: '#E3E3E3', mark: '#FFF6EF' },
+    10: { fill: '#EE8A2A', edge: '#9A520E', line: 'rgba(0,0,0,0.42)', mark: '#3D2409' }
   };
 
   function colors(size) { return PALETTE[size] || PALETTE[10]; }
@@ -38,6 +39,7 @@
     bar.style.borderColor = c.edge;
     bar.style.setProperty('--cell-line', c.line);
     bar.style.setProperty('--cell-line-w', (cell >= 24 ? 2 : 1) + 'px');
+    bar.style.setProperty('--cell-mark', c.mark);
     for (var i = 0; i < size; i++) {
       var s = document.createElement('span');
       s.className = 'cell';

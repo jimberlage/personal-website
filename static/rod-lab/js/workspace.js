@@ -542,7 +542,8 @@
   P._renderGroups = function () {
     var self = this, $ = this.$;
     var sizes = { pos: this._layerSize('pos'), neg: this._layerSize('neg') };
-    var negCount = 0, blocks = 0;
+    var negCount = 0, negBlocks = 0, blocks = 0;
+    var posRods = [];
     this.state.groups.forEach(function (g) {
       if (g.zone === 'neg' && !self.settings.takeAway) g.zone = 'pos';
       var sz = sizes[g.zone];
@@ -551,17 +552,41 @@
       g.y = clamp(g.y, 0, Math.max(0, sz.h - ROD_H));
       if (g.zone === 'pos' && g.x < BIN.w && g.y < BIN.h) g.x = BIN.w + 4;
       var el = R.makeRod(g.size, { label: g.zone === 'neg' ? '−' + g.size : String(g.size) });
+      var label = g.size + '-rod' + (g.zone === 'neg' ? ' in the take-away area' : '');
       el.dataset.id = String(g.id);
       el.tabIndex = 0;
       el.setAttribute('role', 'button');
       el.setAttribute('aria-haspopup', 'menu');
-      el.setAttribute('aria-label', g.size + '-rod' + (g.zone === 'neg' ? ' in the take-away area' : '') + '. Arrow keys move it, Enter opens actions.');
+      el.setAttribute('aria-label', label + '. Arrow keys move it, Enter opens actions.');
       el.style.left = g.x + 'px';
       el.style.top = g.y + 'px';
       (g.zone === 'neg' ? $.layerNeg : $.layerPos).appendChild(el);
-      if (g.zone === 'neg') negCount++;
+      if (g.zone === 'neg') { negCount++; negBlocks += g.size; }
+      else posRods.push({ el: el, label: label });
       blocks += g.size;
     });
+
+    /* Each block in the take-away area crosses out its counterpart in the
+     * main area. Start with the rightmost cells so the untouched blocks stay
+     * together on the left. */
+    var remaining = negBlocks;
+    posRods.forEach(function (r) {
+      if (remaining <= 0) return;
+      var cells = r.el.querySelectorAll('.cell');
+      var count = Math.min(cells.length, remaining);
+      for (var i = cells.length - count; i < cells.length; i++) {
+        var x = document.createElement('span');
+        x.className = 'cell-x';
+        x.setAttribute('aria-hidden', 'true');
+        x.textContent = '\u00D7';
+        cells[i].classList.add('is-taken');
+        cells[i].appendChild(x);
+      }
+      r.el.setAttribute('aria-label', r.label + ', ' + count + (count === 1 ? ' block' : ' blocks') +
+        ' taken away. Arrow keys move it, Enter opens actions.');
+      remaining -= count;
+    });
+
     $.negEmpty.hidden = negCount > 0;
     var n = this.state.groups.length;
     $.status.textContent = n
