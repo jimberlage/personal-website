@@ -4,18 +4,18 @@
 
   var CELL = 34;
 
-  /* Colors by group size. `edge` is a darker shade for the outline. */
+  /* Rod colors by group size. `edge` outlines the rod; `line` separates its unit cells. */
   var PALETTE = {
-    1: { fill: '#F4F1EA', edge: '#8A8578' },
-    2: { fill: '#D7393B', edge: '#8E1F21' },
-    3: { fill: '#8BCB5A', edge: '#4D7E2C' },
-    4: { fill: '#8E5BB8', edge: '#573479' },
-    5: { fill: '#F2CC3A', edge: '#9C7E0F' },
-    6: { fill: '#2F7D4F', edge: '#18492B' },
-    7: { fill: '#2B2B2E', edge: '#000000' },
-    8: { fill: '#8B5A2B', edge: '#563615' },
-    9: { fill: '#3A72C9', edge: '#1F447F' },
-    10: { fill: '#EE8A2A', edge: '#9A520E' }
+    1: { fill: '#F4F1EA', edge: '#8A8578', line: 'rgba(0,0,0,0.42)' },
+    2: { fill: '#D7393B', edge: '#8E1F21', line: 'rgba(255,255,255,0.88)' },
+    3: { fill: '#8BCB5A', edge: '#4D7E2C', line: 'rgba(0,0,0,0.42)' },
+    4: { fill: '#8E5BB8', edge: '#573479', line: 'rgba(255,255,255,0.88)' },
+    5: { fill: '#F2CC3A', edge: '#9C7E0F', line: 'rgba(0,0,0,0.42)' },
+    6: { fill: '#2F7D4F', edge: '#18492B', line: 'rgba(255,255,255,0.88)' },
+    7: { fill: '#2B2B2E', edge: '#000000', line: 'rgba(255,255,255,0.88)' },
+    8: { fill: '#8B5A2B', edge: '#563615', line: 'rgba(255,255,255,0.88)' },
+    9: { fill: '#3A72C9', edge: '#1F447F', line: 'rgba(255,255,255,0.88)' },
+    10: { fill: '#EE8A2A', edge: '#9A520E', line: 'rgba(0,0,0,0.42)' }
   };
 
   function colors(size) { return PALETTE[size] || PALETTE[10]; }
@@ -36,6 +36,8 @@
     var bar = document.createElement('span');
     bar.className = 'rod-bar';
     bar.style.borderColor = c.edge;
+    bar.style.setProperty('--cell-line', c.line);
+    bar.style.setProperty('--cell-line-w', (cell >= 24 ? 2 : 1) + 'px');
     for (var i = 0; i < size; i++) {
       var s = document.createElement('span');
       s.className = 'cell';

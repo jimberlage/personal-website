@@ -156,7 +156,7 @@ button, input { font: inherit; color: inherit; }
 .rod-badge { height: 22px; display: inline-flex; align-items: center; font-size: 13px; font-weight: 700; padding: 0 8px; border-radius: 999px; background: #fff; border: 1px solid var(--line-3); line-height: 1; }
 .rod-bar { display: flex; border: 2px solid; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 0 rgba(30,36,48,0.14); }
 .cell { display: block; flex: 0 0 auto; }
-.cell + .cell { box-shadow: inset 1px 0 0 rgba(0,0,0,0.2); }
+.cell + .cell { box-shadow: inset var(--cell-line-w, 1px) 0 0 var(--cell-line, rgba(0,0,0,0.2)); }
 .rod:focus-visible { outline: none; }
 .rod:focus-visible .rod-bar, .rod.is-selected .rod-bar { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--accent); }
 .rod.is-dragging { position: absolute; transform: rotate(-3deg); cursor: grabbing; }
